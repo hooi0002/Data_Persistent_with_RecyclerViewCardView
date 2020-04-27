@@ -105,4 +105,5 @@ public class MainActivity extends AppCompatActivity {
     //In a ListView, it is pretty easy to implement because a ListView provided the OnItemClick Interface which also gives us the position we click on
     //Now a RECYCLER DOESN'T HAVE THAT INTERFACE. BUT We will create our own by setting our MainActivity as the listener to this interface
 
+    //HEY
 }
