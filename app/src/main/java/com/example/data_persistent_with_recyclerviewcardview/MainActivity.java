@@ -118,5 +118,6 @@ public class MainActivity extends AppCompatActivity {
     //Now a RECYCLER DOESN'T HAVE THAT INTERFACE. BUT We will create our own by setting our MainActivity as the listener to this interface
 
     //For this, we go to ExampleAdapter.java class and make some changes there
+    //Item Touch Helper
 
 }
