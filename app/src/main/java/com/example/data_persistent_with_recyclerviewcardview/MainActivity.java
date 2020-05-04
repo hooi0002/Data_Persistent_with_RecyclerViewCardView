@@ -3,12 +3,10 @@ package com.example.data_persistent_with_recyclerviewcardview;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
 import java.util.ArrayList;
 
 //IN ESSENCE, RECYCLER VIEW NEEDS AN ADAPTER AND VIEW HOLDER
@@ -27,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     //it would have really bad performance
     //The Adapter basically provides only as many items as we need and fit into the screen
     //and prepare the next item in line as we scroll, so doesn't waste memory
-    private RecyclerView.Adapter mAdapter;
+    private ExampleAdapter mAdapter;
 
     //The Layout manager as the name implies will be responsible
     //for aligning the single items in our list
@@ -84,6 +82,13 @@ public class MainActivity extends AppCompatActivity {
         mAdapter.notifyItemRemoved(position);
     }
 
+    public void changeItem(int position, String text) {
+        mExampleList.get(position).changeText1(text);
+        //after getting the position of the ExampleList, we want to change the name of the ExampleList
+        //for this, go to ExampleItem.java and add a method there
+        mAdapter.notifyItemChanged(position);
+    }
+
     public void createExampleList() {
         mExampleList = new ArrayList<>();
         mExampleList.add(new ExampleItem(R.drawable.ic_android, "Line 1", "Line 2"));
@@ -99,11 +104,19 @@ public class MainActivity extends AppCompatActivity {
 
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
+
+        mAdapter.setOnItemClickListener(new ExampleAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                changeItem(position, "Clicked");
+            }
+        });
     }
 
     //Now we are going to create an OnItemClickListener interface to handle click events like we would do it in a ListView.
     //In a ListView, it is pretty easy to implement because a ListView provided the OnItemClick Interface which also gives us the position we click on
     //Now a RECYCLER DOESN'T HAVE THAT INTERFACE. BUT We will create our own by setting our MainActivity as the listener to this interface
 
-    //HEY
+    //For this, we go to ExampleAdapter.java class and make some changes there
+
 }
