@@ -111,6 +111,20 @@ public class MainActivity extends AppCompatActivity {
                 changeItem(position, "Clicked");
             }
         });
+        
+        //Swipe left or right to delete item
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                mExampleList.remove(viewHolder.getAdapterPosition());
+                mAdapter.notifyDataSetChanged();
+            }
+        }).attachToRecyclerView(mRecyclerView);
     }
 
     //Now we are going to create an OnItemClickListener interface to handle click events like we would do it in a ListView.
